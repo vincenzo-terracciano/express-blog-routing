@@ -55,7 +55,18 @@ router.get('/', (req, res) => {
 
 // show
 router.get('/:post', (req, res) => {
-    res.send(`Show post: ${req.params.post}`)
+    let findPost = {};
+    posts.forEach((post) => {
+        if(post.slug === req.params.post){
+            findPost = post
+        }
+    })
+    if(findPost){
+        res.json(findPost)
+    }
+    else {
+        res.send('Post not found')
+    }
 })
 
 // store
